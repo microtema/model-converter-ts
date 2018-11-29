@@ -6,15 +6,7 @@ npm install model-converter-ts
 ```
 ## Usage
 ```typescript
-import {ModelBuilder} from 'model-converter-ts';
-
-interface Person {
-  name: string;
-  age: number;
-  dob: Date;
-  married: boolean;
-  email?: string;
-}
+import {ModelConverter} from 'model-converter-ts';
 
 class PersonModelConverter extends ModelConverter<Person, PersonDTO, Context> {
   
