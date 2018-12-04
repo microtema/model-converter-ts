@@ -13,13 +13,16 @@ class PersonModelConverter extends ModelConverter<Person, PersonDTO, Context> {
   
     public update(dto: PersonDTO, person: Person, context?: Context):void {
         
-      dto.age: parseInt(person.age, 10);
-      dto.dob: new Date(person.dobAsLong);
-      dto.email: person.email;
-      dto.married: person.status === 'married';
-      dto.name: person.firstName + ' ' +person.lastName;
-      dto.parent: context.parent;
+      if(!person){
+          return;
+      } 
       
+      dto.age = parseInt(person.age, 10);
+      dto.dob = new Date(person.dobAsLong);
+      dto.email = person.email;
+      dto.married = (person.status === 'married');
+      dto.name = person.firstName + ' ' + person.lastName;
+      dto.parent = context.parent;
     }
 }
 ```
@@ -43,6 +46,9 @@ const dtos = converter.connvertList(service.findAllPersons());
 const personDTO = new PersonDTO();
 converter.update(personDTO, service.findPersonById(1))
 ```
+
+## Motivation
+SRP Pattern
 
 ## License
 MIT (unless noted otherwise)
