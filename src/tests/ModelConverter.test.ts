@@ -1,9 +1,29 @@
 import { ModelConverter } from '../index';
 
-test('Default ModelConverter', () => {
+describe('ModelConverter', () => {
+  let sut: ModelConverter<any, any, any>;
 
-  const sut = new ModelConverter();
+  beforeEach(() => {
+    sut = new ModelConverter();
+  });
 
-  expect(sut.convert({foo:'bar'})).toEqual({foo:'bar'});
+  test('convert', () => {
+    expect(sut.convert({ foo: 'bar' })).toEqual({ foo: 'bar' });
+  });
 
+  test('update will override', () => {
+    const target = { foo: 'xxx' };
+
+    sut.update(target, { foo: 'bar' });
+
+    expect(target).toEqual({ foo: 'bar' });
+  });
+
+  test('update with merge', () => {
+    const target = { foo: 'bar', other: 2 };
+
+    sut.update(target, { foo: 'bar' });
+
+    expect(target).toEqual({ foo: 'bar', other: 2 });
+  });
 });
