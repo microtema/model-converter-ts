@@ -20,7 +20,7 @@ export class ModelConverter<S, T, M> {
 
     const target = {} as T;
 
-    this.update(target, source);
+    this.update(target, source, meta);
 
     return target;
   }
